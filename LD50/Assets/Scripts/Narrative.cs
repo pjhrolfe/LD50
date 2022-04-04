@@ -21,7 +21,7 @@ public class Narrative : MonoBehaviour {
     private bool _choicesCreated;
     
     private float _nextLineTimer;
-    private float _nextLineTime = 1f;
+    private float _nextLineTime = 1.5f;
 
     private void Awake() {
         _scenarioStory = new Story(scenarioInkAsset.text);
@@ -75,10 +75,13 @@ public class Narrative : MonoBehaviour {
 
         if (!_scenarioStory.canContinue && _scenarioStory.currentChoices.Count == 0) {
             //Game.Instance.map.gameObject.SetActive(true);
-            if (SceneManager.GetActiveScene().name == "TheEnd") {
+            if (SceneManager.GetActiveScene().name.Equals("TheEnd")) {
+                Debug.Log(SceneManager.GetActiveScene().name);
                 SceneManager.LoadScene("Credits");
             }
-            SceneManager.LoadScene("MapView");
+            else {
+                SceneManager.LoadScene("MapView");
+            }
         }
         
         ScrollToBottom();
